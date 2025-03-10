@@ -27,9 +27,14 @@ jobs:
           # INSTALL SCOUT COMMAND
           curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh
           sh install-scout.sh
+          
       - name: Build Docker
         run: |
           docker build -t joffreydupire/voting-app:latest .
+
+      - name: Docker Login
+        run: |
+          docker login -u joffreydupire -p ${{ secrets.DOCKER_TOKEN }}
 
       - name: Docker scout
         run: |
@@ -37,5 +42,4 @@ jobs:
 
       - name: Docker push
         run: |
-          docker login -u joffreydupire -p ${{ secrets.DOCKER_TOKEN }}
           docker push joffreydupire/voting-app:latest
