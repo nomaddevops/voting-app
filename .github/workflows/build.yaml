@@ -23,6 +23,10 @@ jobs:
             sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
           sudo apt-get update -y 
           sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+          
+          # INSTALL SCOUT COMMAND
+          curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh
+          sh install-scout.sh
       - name: Build Docker
         run: |
           docker build -t joffreydupire/voting-app:latest .
